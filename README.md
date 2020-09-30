@@ -1,0 +1,1 @@
+# szamitogep_biztonsag-barmilehet
