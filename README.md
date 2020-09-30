@@ -1,1 +1,1 @@
-# szamitogep_biztonsag-barmilehet
+# szamitogep_biztonsag-barmilehet hazi feladat
