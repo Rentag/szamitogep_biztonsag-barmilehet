@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,25 +12,25 @@ using namespace std;
 #pragma pack(1) //pragma pack to match an EXACT data layout
 struct CaffHeader {
     char magic[4]; // 4 bytes
-    __int64 h_size; // 8 bytes
-    __int64 count; // 8 bytes
+    uint64_t h_size; // 8 bytes
+    uint64_t count; // 8 bytes
 };
 #pragma pack(pop)
 
 #pragma pack(push)
 #pragma pack(1)
 struct CaffBlock {
-    __int8 blockType; // 1 byte
-    __int64 blockSize; // 8 bytes
+    uint8_t blockType; // 1 byte
+    uint64_t blockSize; // 8 bytes
 };
 #pragma pack(pop)
 
 void generateCiff(const char* caffSrc, const char* ciffDst) {
 
     ifstream is(caffSrc, ios::binary | ios::in);
-    if (!is.is_open()) { cerr << "File not found" << endl; exit(EXIT_FAILURE); }
+    if (!is.is_open()) { cerr << "File not found" << endl; exit(1); }
     ofstream os(ciffDst, ios::binary | ios::out);
-    if (!os.is_open()) { is.close(); cerr << "File could not be created" << endl; exit(EXIT_FAILURE); }
+    if (!os.is_open()) { is.close(); cerr << "File could not be created" << endl; exit(1); }
 
     CaffBlock cf; // 9 byte
     CaffHeader ch; // 20 byte
