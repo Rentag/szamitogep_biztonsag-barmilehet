@@ -1,0 +1,64 @@
+﻿@using Webshop.Models.AccountViewModels
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">
+            <div class="failureNotification">@Html.ValidationSummary(true, "Registration failed!")</div>
+            <h4><b>Personal data:</b></h4>
+            <div class="form-group row">
+                <label asp-for="Name" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-3">E-mail:</label>
+                <div class="col-sm-9">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+            <h4><b>Login data:</b></h4>
+            <div class="form-group row">
+                <label asp-for="UserName" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="UserName" size="40" class="form-control" />
+                    <span asp-validation-for="UserName"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Password" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Password" size="40" class="form-control" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ConfirmPassword" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="ConfirmPassword" size="40" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <a onclick="location.href='@Url.Action("Index", "CaffFile")'" class="btn btn-default btn-block">Back</a>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

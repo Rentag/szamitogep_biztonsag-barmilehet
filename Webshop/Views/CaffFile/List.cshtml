@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Webshop.Models.CaffFile>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Path)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Path)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>
+            <td>
+                @if ((await AuthorizationService.AuthorizeAsync(
+                User, item,
+                CaffFileOperations.Update)).Succeeded)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <text> | </text>
+                }
+                @if ((await AuthorizationService.AuthorizeAsync(
+                 User, item,
+                 CaffFileOperations.Delete)).Succeeded)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
