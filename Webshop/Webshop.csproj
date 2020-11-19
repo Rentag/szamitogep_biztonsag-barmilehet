@@ -19,6 +19,16 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Ciff">
+      <HintPath>obj\Debug\netcoreapp2.1\Ciff.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp">
+      <HintPath>obj\Debug\netcoreapp2.1\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

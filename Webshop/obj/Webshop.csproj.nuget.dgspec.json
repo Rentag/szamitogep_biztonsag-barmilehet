@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\BME\\3_felev\\szgep_bizt\\HF\\Webshop\\Webshop.csproj": {}
+    "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\akos\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj": {}
   },
   "projects": {
-    "C:\\BME\\3_felev\\szgep_bizt\\HF\\Webshop\\Webshop.csproj": {
+    "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\akos\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\BME\\3_felev\\szgep_bizt\\HF\\Webshop\\Webshop.csproj",
+        "projectUniqueName": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\akos\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj",
         "projectName": "Webshop",
-        "projectPath": "C:\\BME\\3_felev\\szgep_bizt\\HF\\Webshop\\Webshop.csproj",
-        "packagesPath": "C:\\Users\\norbi\\.nuget\\packages\\",
-        "outputPath": "C:\\BME\\3_felev\\szgep_bizt\\HF\\Webshop\\obj\\",
+        "projectPath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\akos\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj",
+        "packagesPath": "C:\\Users\\playm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\akos\\szamitogep_biztonsag-barmilehet\\Webshop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\norbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\playm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp2.1": {
-            "targetAlias": "netcoreapp2.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "targetAlias": "netcoreapp2.1",
           "dependencies": {
             "Microsoft.AspNetCore": {
               "target": "Package",
@@ -94,6 +92,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[2.1.10, )"
+            },
+            "System.Runtime.CompilerServices.Unsafe": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -106,7 +108,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
