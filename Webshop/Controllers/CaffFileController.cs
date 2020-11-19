@@ -13,8 +13,11 @@ using Webshop.Data;
 using Webshop.Models;
 using Webshop.ViewModels.CaffFileViewModels;
 using Ciff;
+using System.Diagnostics;
 
 using SixLabors.ImageSharp;
+using Microsoft.Extensions.Logging;
+
 namespace Webshop.Controllers
 {
     [Authorize(Roles = "Admin,User")]
@@ -39,16 +42,19 @@ namespace Webshop.Controllers
         //20MB
         private static long fileSizeLimit = 20000 * 1024;
 
-        public CaffFileController(WebshopContext context, UserManager<SiteUser> userManager, IAuthorizationService authorizationService)
+        private readonly ILogger<CaffFileController> _logger;
+        public CaffFileController(WebshopContext context, UserManager<SiteUser> userManager, IAuthorizationService authorizationService, ILogger<CaffFileController> logger)
         {
             _context = context;
             _userManager = userManager;
             _authorizationService = authorizationService;
+            _logger = logger;
         }
         
 
         public async Task<IActionResult> Index(string searchString)
         {
+            _logger.LogInformation("User : "+ _userManager.GetUserName(User) + "  Action: The /Index page has been accessed.");
             ViewData["CurrentFilter"] = searchString;
             var caffFiles = from c in _context.CaffFiles.Include(c => c.User) select c;
 
@@ -61,11 +67,13 @@ namespace Webshop.Controllers
 
         public IActionResult List()
         {
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /List page has been accessed.");
             return View("List", _context.CaffFiles.Where(c => c.UserId == int.Parse(_userManager.GetUserId(User))));
         }
 
         public IActionResult Create()
         {
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Create page has been accessed.");
             return View();
         }
 
@@ -108,12 +116,15 @@ namespace Webshop.Controllers
                     _context.CaffFiles.Add(newCaffFile);
                    
                     await _context.SaveChangesAsync();
-
+                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: Uploaded a new CAFF. CaffPath: "+ caffPath);
+                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: Uploaded a new CAFF. ImagePath: " + imagePath);
                 }
                 
                 return RedirectToAction(nameof(Index));
 
             }
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The model is invalid.");
+
             return View(caff);
         }
 
@@ -125,6 +136,7 @@ namespace Webshop.Controllers
             if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
             {
                 isvalid = false;
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the file is empty.");
                 ViewBag.Failure = "File upload was unsuccessful due to not appropriate file extension.";
               //  return View("Error");
             }
@@ -147,6 +159,8 @@ namespace Webshop.Controllers
                     headerBytes.Take(signature.Length + 9).SequenceEqual(signature))))
                 {
                     isvalid = false;
+                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the signature is incorrect.");
+
                     ViewBag.Failure = "File upload was unsuccessful due to not appropriate magic numbers.";
                     //return View("Error");
                 }
@@ -177,11 +191,14 @@ namespace Webshop.Controllers
                     {
                         formFile.CopyToAsync(stream);
                     }
+                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file, "+ random.Split(".")[0] + ".caff is valid.");
                     //return filePaths;
                 }
             }
             else
             {
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the file size is incorrect.");
+
                 ViewBag.Failure = "File upload was unsuccessful due to not appropriate file size.";
                 //return View("Error");
             }
@@ -190,6 +207,8 @@ namespace Webshop.Controllers
 
         public IActionResult Edit(int? id)
         {
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Edit page has been accessed.");
+
             if (id == null)
             {
                 return NotFound();
@@ -204,6 +223,8 @@ namespace Webshop.Controllers
             var isAuthorized = _authorizationService.AuthorizeAsync(User, caffFileToEdit, CaffFileOperations.Update);
             if (!isAuthorized.Result.Succeeded)
             {
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Edit page hasn't been accessed because the user does not have the right to do so.");
+
                 return Unauthorized();
             }
             return View(caffFileToEdit);
@@ -214,9 +235,10 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CaffFile editedCaffFile)
         {
+            var originalCaffFile = GetCaffFile(editedCaffFile.Id);
             if (ModelState.IsValid)
             {
-                var originalCaffFile = GetCaffFile(editedCaffFile.Id);
+                
                 if (originalCaffFile == null)
                 {
                     return NotFound();
@@ -230,13 +252,17 @@ namespace Webshop.Controllers
 
                 originalCaffFile.Comment = editedCaffFile.Comment;
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file "+ originalCaffFile.Path+ " has been modified successfully.");
                 return RedirectToAction("Index");
             }
+           // var originalCaffFile = GetCaffFile(editedCaffFile.Id);
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + originalCaffFile.Path + " hasn't been modified successfully.");
             return View(editedCaffFile);
         }
 
         public IActionResult Delete(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -251,10 +277,13 @@ namespace Webshop.Controllers
             var isAuthorized = _authorizationService.AuthorizeAsync(User, caffToDelete, CaffFileOperations.Delete);
             if (!isAuthorized.Result.Succeeded)
             {
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Delete page hasn't been accessed. File: "+caffToDelete.Path);
+
                 return Unauthorized();
             }
             //string[] files = Directory.GetFiles("");
-           
+
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Delete page has been accessed.");
 
 
             return View(caffToDelete);
@@ -274,7 +303,10 @@ namespace Webshop.Controllers
             var isAuthorized = _authorizationService.AuthorizeAsync(User, originalCaffFile, CaffFileOperations.Delete);
             if (!isAuthorized.Result.Succeeded)
             {
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The user tried to access to the delete page of " + originalCaffFile.Path + "but has no right to do so. " );
+
                 return Unauthorized();
+
             }
             var paths = new List<string>();
             
@@ -285,9 +317,10 @@ namespace Webshop.Controllers
             System.IO.File.Delete(Directory.GetCurrentDirectory()+ "\\wwwroot" + paths[0]);
             System.IO.File.Delete(Directory.GetCurrentDirectory() + paths[1]);
             System.IO.File.Delete(Directory.GetCurrentDirectory() + paths[2]);
-            
-            
-            
+
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + originalCaffFile.Path + " has been deleted successfully.");
+
+
             _context.CaffFiles.Remove(originalCaffFile);
             await _context.SaveChangesAsync();
             // TODO: Delete CAFF and PNG files as well
@@ -311,13 +344,15 @@ namespace Webshop.Controllers
 
            
             var path =  Directory.GetCurrentDirectory() + GetCaffFile(id).Path;
-
+            
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 await stream.CopyToAsync(memory);
             }
             memory.Position = 0;
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + path + " has been downloaded successfully.");
+
             return File(memory,GetContentType(path), Path.GetFileName(path));
         }
 

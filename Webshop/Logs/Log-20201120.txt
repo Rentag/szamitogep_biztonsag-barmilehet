@@ -1,0 +1,121 @@
+2020-11-20T00:45:34.7985847+01:00 0HM4CSKPN9UEF:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/   (ca22a1cb)
+2020-11-20T00:45:35.2815953+01:00 0HM4CSKPN9UEF:00000001 [INF] Route matched with "{action = \"Index\", controller = \"CaffFile\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String)" on controller "Webshop.Controllers.CaffFileController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:35.3319348+01:00 0HM4CSKPN9UEF:00000001 [INF] Authorization failed. (b15dd539)
+2020-11-20T00:45:35.3331122+01:00 0HM4CSKPN9UEF:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2020-11-20T00:45:35.3465652+01:00 0HM4CSKPN9UEF:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2020-11-20T00:45:35.3955756+01:00 0HM4CSKPN9UEF:00000001 [INF] AuthenticationScheme: "Identity.Application" was challenged. (d45f1f38)
+2020-11-20T00:45:35.4039746+01:00 0HM4CSKPN9UEF:00000001 [INF] Executed action "Webshop.Controllers.CaffFileController.Index (Webshop)" in 112.8611ms (afa2e885)
+2020-11-20T00:45:35.4298773+01:00 0HM4CSKPN9UEF:00000001 [INF] Request finished in 635.8247ms 302  (791a596a)
+2020-11-20T00:45:35.4312757+01:00 0HM4CSKPN9UEF:00000002 [INF] Request starting HTTP/1.1 GET https://localhost:5001/Account/Login?ReturnUrl=%2F   (ca22a1cb)
+2020-11-20T00:45:35.4545481+01:00 0HM4CSKPN9UEF:00000002 [INF] Route matched with "{action = \"Login\", controller = \"Account\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(System.String)" on controller "Webshop.Controllers.AccountController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:35.5370492+01:00 0HM4CSKPN9UEF:00000002 [INF] Executing action method "Webshop.Controllers.AccountController.Login (Webshop)" - Validation state: Valid (dad538d7)
+2020-11-20T00:45:35.5696852+01:00 0HM4CSKPN9UEF:00000002 [INF] AuthenticationScheme: "Identity.External" signed out. (d3f50c8d)
+2020-11-20T00:45:35.5802901+01:00 0HM4CSKPN9UEF:00000002 [INF] Executed action method "Webshop.Controllers.AccountController.Login (Webshop)", returned result "Microsoft.AspNetCore.Mvc.ViewResult" in 34.0717ms. (50a9e262)
+2020-11-20T00:45:35.6264489+01:00 0HM4CSKPN9UEF:00000002 [INF] Executing ViewResult, running view "Login". (c83d0e25)
+2020-11-20T00:45:36.1104943+01:00 0HM4CSKPN9UEF:00000002 [INF] Executed ViewResult - view "Login" executed in 516.4005ms. (f66409e9)
+2020-11-20T00:45:36.1116469+01:00 0HM4CSKPN9UEF:00000002 [INF] Executed action "Webshop.Controllers.AccountController.Login (Webshop)" in 656.8679ms (afa2e885)
+2020-11-20T00:45:36.1210956+01:00 0HM4CSKPN9UEF:00000002 [INF] Request finished in 689.7807ms 200 text/html; charset=utf-8 (791a596a)
+2020-11-20T00:45:38.4074246+01:00 0HM4CSKPN9UEF:00000003 [INF] Request starting HTTP/1.1 POST https://localhost:5001/Account/Login?returnurl=%2F application/x-www-form-urlencoded 235 (ca22a1cb)
+2020-11-20T00:45:38.4187825+01:00 0HM4CSKPN9UEF:00000003 [INF] Route matched with "{action = \"Login\", controller = \"Account\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Webshop.Models.AccountViewModels.LoginViewModel, System.String)" on controller "Webshop.Controllers.AccountController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:38.4699917+01:00 0HM4CSKPN9UEF:00000003 [INF] Executing action method "Webshop.Controllers.AccountController.Login (Webshop)" - Validation state: Valid (dad538d7)
+2020-11-20T00:45:38.4736032+01:00 0HM4CSKPN9UEF:00000003 [INF] The LOGGED IN page has been accessed (f26787bc)
+2020-11-20T00:45:38.4879654+01:00 0HM4CSKPN9UEF:00000003 [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"WebshopContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-11-20T00:45:38.6454023+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed DbCommand ("23"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[Name], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [SiteUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2020-11-20T00:45:38.9756141+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed DbCommand ("17"ms) [Parameters=["@__user_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [uc].[Id], [uc].[ClaimType], [uc].[ClaimValue], [uc].[UserId]
+FROM [AspNetUserClaims] AS [uc]
+WHERE [uc].[UserId] = @__user_Id_0" (0723d8ff)
+2020-11-20T00:45:39.0613851+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed DbCommand ("7"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [role].[Name]
+FROM [AspNetUserRoles] AS [userRole]
+INNER JOIN [AspNetRoles] AS [role] ON [userRole].[RoleId] = [role].[Id]
+WHERE [userRole].[UserId] = @__userId_0" (0723d8ff)
+2020-11-20T00:45:39.0942916+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0" (0723d8ff)
+2020-11-20T00:45:39.1382120+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed DbCommand ("3"ms) [Parameters=["@__role_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [rc].[ClaimType], [rc].[ClaimValue]
+FROM [AspNetRoleClaims] AS [rc]
+WHERE [rc].[RoleId] = @__role_Id_0" (0723d8ff)
+2020-11-20T00:45:39.1649279+01:00 0HM4CSKPN9UEF:00000003 [INF] AuthenticationScheme: "Identity.Application" signed in. (c66dd7e7)
+2020-11-20T00:45:39.1723930+01:00 0HM4CSKPN9UEF:00000003 [INF] The user: admin page has been logged in. (826b0510)
+2020-11-20T00:45:39.1777093+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed action method "Webshop.Controllers.AccountController.Login (Webshop)", returned result "Microsoft.AspNetCore.Mvc.RedirectResult" in 707.4518ms. (50a9e262)
+2020-11-20T00:45:39.1885095+01:00 0HM4CSKPN9UEF:00000003 [INF] Executing RedirectResult, redirecting to "/". (d98d540e)
+2020-11-20T00:45:39.1934344+01:00 0HM4CSKPN9UEF:00000003 [INF] Executed action "Webshop.Controllers.AccountController.Login (Webshop)" in 774.4837ms (afa2e885)
+2020-11-20T00:45:39.2028762+01:00 0HM4CSKPN9UEF:00000003 [INF] Request finished in 795.5062ms 302  (791a596a)
+2020-11-20T00:45:39.2089825+01:00 0HM4CSKPN9UEF:00000004 [INF] Request starting HTTP/1.1 GET https://localhost:5001/   (ca22a1cb)
+2020-11-20T00:45:39.2214126+01:00 0HM4CSKPN9UEF:00000004 [INF] Route matched with "{action = \"Index\", controller = \"CaffFile\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String)" on controller "Webshop.Controllers.CaffFileController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:39.2221647+01:00 0HM4CSKPN9UEF:00000004 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:39.2231765+01:00 0HM4CSKPN9UEF:00000004 [INF] Executing action method "Webshop.Controllers.CaffFileController.Index (Webshop)" - Validation state: Valid (dad538d7)
+2020-11-20T00:45:39.2289561+01:00 0HM4CSKPN9UEF:00000004 [INF] User : admin  Action: The /Index page has been accessed. (dd065b6a)
+2020-11-20T00:45:39.2306107+01:00 0HM4CSKPN9UEF:00000004 [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"WebshopContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-11-20T00:45:39.4295403+01:00 0HM4CSKPN9UEF:00000004 [INF] Executed DbCommand ("109"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[Comment], [c].[ImagePath], [c].[Path], [c].[UserId], [c.User].[Id], [c.User].[AccessFailedCount], [c.User].[ConcurrencyStamp], [c.User].[Email], [c.User].[EmailConfirmed], [c.User].[LockoutEnabled], [c.User].[LockoutEnd], [c.User].[Name], [c.User].[NormalizedEmail], [c.User].[NormalizedUserName], [c.User].[PasswordHash], [c.User].[PhoneNumber], [c.User].[PhoneNumberConfirmed], [c.User].[SecurityStamp], [c.User].[TwoFactorEnabled], [c.User].[UserName]
+FROM [CaffFiles] AS [c]
+INNER JOIN [SiteUsers] AS [c.User] ON [c].[UserId] = [c.User].[Id]" (0723d8ff)
+2020-11-20T00:45:39.4757210+01:00 0HM4CSKPN9UEF:00000004 [INF] Executed action method "Webshop.Controllers.CaffFileController.Index (Webshop)", returned result "Microsoft.AspNetCore.Mvc.ViewResult" in 252.3466ms. (50a9e262)
+2020-11-20T00:45:39.4817944+01:00 0HM4CSKPN9UEF:00000004 [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2020-11-20T00:45:39.5230079+01:00 0HM4CSKPN9UEF:00000004 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:39.5252021+01:00 0HM4CSKPN9UEF:00000004 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:39.5364970+01:00 0HM4CSKPN9UEF:00000004 [INF] Executed ViewResult - view "Index" executed in 60.2423ms. (f66409e9)
+2020-11-20T00:45:39.5367931+01:00 0HM4CSKPN9UEF:00000004 [INF] Executed action "Webshop.Controllers.CaffFileController.Index (Webshop)" in 315.2161ms (afa2e885)
+2020-11-20T00:45:39.5372762+01:00 0HM4CSKPN9UEF:00000004 [INF] Request finished in 328.3377ms 200 text/html; charset=utf-8 (791a596a)
+2020-11-20T00:45:39.5662482+01:00 0HM4CSKPN9UEF:00000005 [INF] Request starting HTTP/1.1 GET https://localhost:5001/images/uploads/ksz3addz.png   (ca22a1cb)
+2020-11-20T00:45:39.5777159+01:00 0HM4CSKPN9UEF:00000005 [INF] The file "/images/uploads/ksz3addz.png" was not modified (f1f8d725)
+2020-11-20T00:45:39.5804852+01:00 0HM4CSKPN9UEF:00000005 [INF] Request finished in 14.2883ms 304 image/png (791a596a)
+2020-11-20T00:45:42.2168675+01:00 0HM4CSKPN9UEF:00000006 [INF] Request starting HTTP/1.1 GET https://localhost:5001/CaffFile/Create   (ca22a1cb)
+2020-11-20T00:45:42.2288161+01:00 0HM4CSKPN9UEF:00000006 [INF] Route matched with "{action = \"Create\", controller = \"CaffFile\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Create()" on controller "Webshop.Controllers.CaffFileController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:42.2292251+01:00 0HM4CSKPN9UEF:00000006 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:42.2295822+01:00 0HM4CSKPN9UEF:00000006 [INF] Executing action method "Webshop.Controllers.CaffFileController.Create (Webshop)" - Validation state: Valid (dad538d7)
+2020-11-20T00:45:42.2311340+01:00 0HM4CSKPN9UEF:00000006 [INF] User : admin  Action: The /Create page has been accessed. (7e98485a)
+2020-11-20T00:45:42.2314637+01:00 0HM4CSKPN9UEF:00000006 [INF] Executed action method "Webshop.Controllers.CaffFileController.Create (Webshop)", returned result "Microsoft.AspNetCore.Mvc.ViewResult" in 1.6889ms. (50a9e262)
+2020-11-20T00:45:42.2376033+01:00 0HM4CSKPN9UEF:00000006 [INF] Executing ViewResult, running view "Create". (c83d0e25)
+2020-11-20T00:45:42.2839307+01:00 0HM4CSKPN9UEF:00000006 [INF] Executed ViewResult - view "Create" executed in 52.2146ms. (f66409e9)
+2020-11-20T00:45:42.2841521+01:00 0HM4CSKPN9UEF:00000006 [INF] Executed action "Webshop.Controllers.CaffFileController.Create (Webshop)" in 55.103ms (afa2e885)
+2020-11-20T00:45:42.2843558+01:00 0HM4CSKPN9UEF:00000006 [INF] Request finished in 68.0359ms 200 text/html; charset=utf-8 (791a596a)
+2020-11-20T00:45:48.3635346+01:00 0HM4CSKPN9UEF:00000007 [INF] Request starting HTTP/1.1 POST https://localhost:5001/CaffFile/Create multipart/form-data; boundary=----WebKitFormBoundarygqy7so4TdSCRz6Dk 4002862 (ca22a1cb)
+2020-11-20T00:45:48.3800839+01:00 0HM4CSKPN9UEF:00000007 [INF] Route matched with "{action = \"Create\", controller = \"CaffFile\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(Webshop.ViewModels.CaffFileViewModels.CaffFileViewModel)" on controller "Webshop.Controllers.CaffFileController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:48.3803129+01:00 0HM4CSKPN9UEF:00000007 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:48.5747024+01:00 0HM4CSKPN9UEF:00000007 [INF] Executing action method "Webshop.Controllers.CaffFileController.Create (Webshop)" - Validation state: Valid (dad538d7)
+2020-11-20T00:45:48.5794119+01:00 0HM4CSKPN9UEF:00000007 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:50.1970772+01:00 0HM4CSKPN9UEF:00000007 [INF] User : admin  Action: The uploaded file, f3bozjrr.caff is valid. (6768fea6)
+2020-11-20T00:45:50.1991755+01:00 0HM4CSKPN9UEF:00000007 [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"WebshopContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-11-20T00:45:50.3422424+01:00 0HM4CSKPN9UEF:00000007 [INF] Executed DbCommand ("12"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [CaffFiles] ([Comment], [ImagePath], [Path], [UserId])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [Id]
+FROM [CaffFiles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-11-20T00:45:50.3902008+01:00 0HM4CSKPN9UEF:00000007 [INF] User : admin  Action: Uploaded a new CAFF. CaffPath: \Uploads\CAFF\f3bozjrr.caff (44688fc1)
+2020-11-20T00:45:50.3905552+01:00 0HM4CSKPN9UEF:00000007 [INF] User : admin  Action: Uploaded a new CAFF. ImagePath: \images\uploads\f3bozjrr.png (4b1b6d85)
+2020-11-20T00:45:50.3910706+01:00 0HM4CSKPN9UEF:00000007 [INF] Executed action method "Webshop.Controllers.CaffFileController.Create (Webshop)", returned result "Microsoft.AspNetCore.Mvc.RedirectToActionResult" in 1816.1932ms. (50a9e262)
+2020-11-20T00:45:50.3922468+01:00 0HM4CSKPN9UEF:00000007 [INF] Executing RedirectResult, redirecting to "/". (d98d540e)
+2020-11-20T00:45:50.3925765+01:00 0HM4CSKPN9UEF:00000007 [INF] Executed action "Webshop.Controllers.CaffFileController.Create (Webshop)" in 2012.3103ms (afa2e885)
+2020-11-20T00:45:50.3974576+01:00 0HM4CSKPN9UEF:00000007 [INF] Request finished in 2034.5996ms 302  (791a596a)
+2020-11-20T00:45:50.4005456+01:00 0HM4CSKPN9UEF:00000008 [INF] Request starting HTTP/1.1 GET https://localhost:5001/   (ca22a1cb)
+2020-11-20T00:45:50.4017231+01:00 0HM4CSKPN9UEF:00000008 [INF] Route matched with "{action = \"Index\", controller = \"CaffFile\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String)" on controller "Webshop.Controllers.CaffFileController" ("Webshop"). (122b2fdf)
+2020-11-20T00:45:50.4021038+01:00 0HM4CSKPN9UEF:00000008 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:50.4023863+01:00 0HM4CSKPN9UEF:00000008 [INF] Executing action method "Webshop.Controllers.CaffFileController.Index (Webshop)" - Validation state: Valid (dad538d7)
+2020-11-20T00:45:50.4024659+01:00 0HM4CSKPN9UEF:00000008 [INF] User : admin  Action: The /Index page has been accessed. (dd065b6a)
+2020-11-20T00:45:50.4029793+01:00 0HM4CSKPN9UEF:00000008 [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"WebshopContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-11-20T00:45:50.4089731+01:00 0HM4CSKPN9UEF:00000008 [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[Comment], [c].[ImagePath], [c].[Path], [c].[UserId], [c.User].[Id], [c.User].[AccessFailedCount], [c.User].[ConcurrencyStamp], [c.User].[Email], [c.User].[EmailConfirmed], [c.User].[LockoutEnabled], [c.User].[LockoutEnd], [c.User].[Name], [c.User].[NormalizedEmail], [c.User].[NormalizedUserName], [c.User].[PasswordHash], [c.User].[PhoneNumber], [c.User].[PhoneNumberConfirmed], [c.User].[SecurityStamp], [c.User].[TwoFactorEnabled], [c.User].[UserName]
+FROM [CaffFiles] AS [c]
+INNER JOIN [SiteUsers] AS [c.User] ON [c].[UserId] = [c.User].[Id]" (0723d8ff)
+2020-11-20T00:45:50.4111922+01:00 0HM4CSKPN9UEF:00000008 [INF] Executed action method "Webshop.Controllers.CaffFileController.Index (Webshop)", returned result "Microsoft.AspNetCore.Mvc.ViewResult" in 8.6415ms. (50a9e262)
+2020-11-20T00:45:50.4115116+01:00 0HM4CSKPN9UEF:00000008 [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2020-11-20T00:45:50.4149428+01:00 0HM4CSKPN9UEF:00000008 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:50.4151907+01:00 0HM4CSKPN9UEF:00000008 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:50.4185703+01:00 0HM4CSKPN9UEF:00000008 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:50.4189051+01:00 0HM4CSKPN9UEF:00000008 [INF] Authorization was successful. (0d575a54)
+2020-11-20T00:45:50.4205322+01:00 0HM4CSKPN9UEF:00000008 [INF] Executed ViewResult - view "Index" executed in 9.0686ms. (f66409e9)
+2020-11-20T00:45:50.4206884+01:00 0HM4CSKPN9UEF:00000008 [INF] Executed action "Webshop.Controllers.CaffFileController.Index (Webshop)" in 18.8238ms (afa2e885)
+2020-11-20T00:45:50.4209527+01:00 0HM4CSKPN9UEF:00000008 [INF] Request finished in 20.8775ms 200 text/html; charset=utf-8 (791a596a)
+2020-11-20T00:45:50.4650994+01:00 0HM4CSKPN9UEF:00000009 [INF] Request starting HTTP/1.1 GET https://localhost:5001/images/uploads/f3bozjrr.png   (ca22a1cb)
+2020-11-20T00:45:50.5504265+01:00 0HM4CSKPN9UEF:00000009 [INF] Sending file. Request path: '"/images/uploads/f3bozjrr.png"'. Physical path: '"C:\Users\playm\Desktop\MSc\szamitogep_biztonsag\akos\szamitogep_biztonsag-barmilehet\Webshop\wwwroot\images\uploads\f3bozjrr.png"' (27b0a520)
+2020-11-20T00:45:50.5507671+01:00 0HM4CSKPN9UEF:00000009 [INF] Request finished in 85.7194ms 200 image/png (791a596a)

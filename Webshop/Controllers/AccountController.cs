@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Webshop.Controllers
 {
@@ -15,12 +16,15 @@ namespace Webshop.Controllers
     {
         private readonly UserManager<SiteUser> _userManager;
         private readonly SignInManager<SiteUser> _signInManager;
+        private readonly ILogger<CaffFileController> _logger;
         public AccountController(
             UserManager<SiteUser> userManager,
-            SignInManager<SiteUser> signInManager)
+            SignInManager<SiteUser> signInManager,
+            ILogger<CaffFileController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -54,12 +58,20 @@ namespace Webshop.Controllers
 
                     await _signInManager.SignInAsync(SiteUser, isPersistent: false);
                     if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        _logger.LogInformation("The user: " + _userManager.GetUserName(User) + " page has been registered.");
                         return Redirect(returnUrl);
+                    }
                     else
+                    {
+                       
+
                         return RedirectToAction("Index", "CaffFile");
+                    }
                 }
                 AddErrors(result);
             }
+            
 
             // If we got this far, something failed, redisplay form
             return View(user);
@@ -69,6 +81,7 @@ namespace Webshop.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
+         //   _logger.LogInformation("The LOGIN page has been accessed");
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
             ViewData["ReturnUrl"] = returnUrl;
@@ -80,6 +93,7 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel user, string returnUrl = null)
         {
+            _logger.LogInformation("The LOGGED IN page has been accessed");
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
@@ -87,13 +101,21 @@ namespace Webshop.Controllers
                 if (result.Succeeded)
                 {
                     if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        _logger.LogInformation("The user: " + user.UserName + " page has been logged in.");
+
                         return Redirect(returnUrl);
+                    }
                     else
+                    {
                         return RedirectToAction("Index", "CaffFile");
+                    }
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    _logger.LogInformation("Invalid login attempt with: "+user.UserName);
+
                     return View(user);
                 }
             }
@@ -104,7 +126,9 @@ namespace Webshop.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            _logger.LogInformation("The user: " + _userManager.GetUserName(User) + " has been logged out.");
             await _signInManager.SignOutAsync();
+
             return RedirectToAction("Index", "CaffFile");
         }
 

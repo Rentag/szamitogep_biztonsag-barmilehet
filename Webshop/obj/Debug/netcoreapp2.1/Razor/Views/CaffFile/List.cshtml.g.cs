@@ -134,7 +134,7 @@ WriteAttributeValue("", 474, item.ImagePath, 474, 15, false);
             WriteLiteral("                    ");
             EndContext();
             BeginContext(867, 53, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ddc0fc128cf24d59854762d430f5145c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b987207462bf411d93c73aaea8111fe2", async() => {
                 BeginContext(912, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -192,7 +192,7 @@ WriteAttributeValue("", 474, item.ImagePath, 474, 15, false);
             WriteLiteral("                    ");
             EndContext();
             BeginContext(1167, 57, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1efaa8fb00464f6d9be648fd0ba2d023", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a3f4e3e1685346d1998755eb935848f0", async() => {
                 BeginContext(1214, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -235,7 +235,7 @@ WriteAttributeValue("", 474, item.ImagePath, 474, 15, false);
             WriteLiteral("                <text> | </text>\r\n                ");
             EndContext();
             BeginContext(1295, 61, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5340c7c50414df9999e608ccb18830d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d1f724c0af3147eea2dde4ec060d3141", async() => {
                 BeginContext(1344, 8, true);
                 WriteLiteral("Download");
                 EndContext();

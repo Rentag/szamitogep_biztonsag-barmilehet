@@ -93,6 +93,10 @@
               "target": "Package",
               "version": "[2.1.10, )"
             },
+            "Serilog.Extensions.Logging.File": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "System.Runtime.CompilerServices.Unsafe": {
               "target": "Package",
               "version": "[5.0.0, )"
