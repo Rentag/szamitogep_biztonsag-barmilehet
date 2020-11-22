@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Registration";
 }
-
-<h2>@ViewData["Title"]</h2>
+<header>
+    <h2>@ViewData["Title"]</h2>
+</header>
 
 <div class="row">
     <div class="col-sm-4">
@@ -47,6 +48,7 @@
                     <span asp-validation-for="ConfirmPassword"></span>
                 </div>
             </div>
+            <br />
             <div class="form-group row">
                 <div class="col-sm-6">
                     <a onclick="location.href='@Url.Action("Index", "CaffFile")'" class="btn btn-default btn-block">Back</a>

@@ -13,6 +13,10 @@ header {
     padding: 10px 30px;
 }
 
+h4{
+    margin: 24px 0px 24px 0px;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -33,6 +37,11 @@ header {
 
 /* Makes the button in line with the search bar */
 .btn-default {
+    padding: 3px 12px;
+    margin: 0px 0px 3px 0px;
+}
+
+.btn-primary {
     padding: 3px 12px;
     margin: 0px 0px 3px 0px;
 }

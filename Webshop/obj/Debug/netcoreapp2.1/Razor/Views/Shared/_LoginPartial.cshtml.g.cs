@@ -95,7 +95,7 @@ using Webshop.Models;
             WriteLiteral("    ");
             EndContext();
             BeginContext(200, 428, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1ff0b61137934837b96ad6f3e9238e1d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2a24722ac22d46d687209b973c832216", async() => {
                 BeginContext(314, 95, true);
                 WriteLiteral("\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li>\r\n                <a>Hello ");
                 EndContext();
@@ -147,7 +147,7 @@ else
             WriteLiteral("    <ul class=\"nav navbar-nav navbar-right\">\r\n        <li>");
             EndContext();
             BeginContext(700, 74, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a4fa4a5c40494786980067c17b4d2368", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a250a72a5a7c4a82a396adbecc4a2714", async() => {
                 BeginContext(762, 8, true);
                 WriteLiteral("Register");
                 EndContext();
@@ -173,7 +173,7 @@ else
             WriteLiteral("</li>\r\n        <li>");
             EndContext();
             BeginContext(793, 69, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf3d6f45ae3146dcadb134bbacb69e72", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "93654da6e91740ca929d26c8605c573d", async() => {
                 BeginContext(852, 6, true);
                 WriteLiteral("Log in");
                 EndContext();
