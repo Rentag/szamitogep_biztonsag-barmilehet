@@ -101,7 +101,7 @@ namespace Webshop.Controllers
                 if (caff.Content != null)
                 {
                     // TODO: Add the file uploader function here that returns the path of the uploaded CAFF file
-                    var verified = VerifyAndUploadCaffFileAsync(caff.Content);
+                    var verified = await VerifyAndUploadCaffFileAsync(caff.Content);
                     var caffPath = verified[0];
                     if (caffPath == "")
                     {
@@ -128,7 +128,7 @@ namespace Webshop.Controllers
             return View(caff);
         }
 
-        public  List<string> VerifyAndUploadCaffFileAsync(IFormFile formFile)
+        public async Task<List<string>> VerifyAndUploadCaffFileAsync(IFormFile formFile)
         {
             var filePaths = new List<string>();
             var ext = Path.GetExtension(formFile.FileName).ToLowerInvariant();
@@ -189,7 +189,7 @@ namespace Webshop.Controllers
                                     Directory.GetCurrentDirectory() + "\\wwwroot\\images\\uploads\\" + random.Split(".")[0] + ".png");
                     using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + filePaths[0]))
                     {
-                        formFile.CopyToAsync(stream);
+                       await formFile.CopyToAsync(stream);
                     }
                     _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file, "+ random.Split(".")[0] + ".caff is valid.");
                     //return filePaths;
