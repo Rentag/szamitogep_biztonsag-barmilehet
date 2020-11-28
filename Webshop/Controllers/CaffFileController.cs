@@ -17,6 +17,7 @@ using System.Diagnostics;
 
 using SixLabors.ImageSharp;
 using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
 
 namespace Webshop.Controllers
 {
@@ -27,9 +28,15 @@ namespace Webshop.Controllers
         private readonly WebshopContext _context;
         private readonly UserManager<SiteUser> _userManager;
         private readonly IAuthorizationService _authorizationService;
+        private readonly object balanceLock = new object();
 
-        //for caff validation
+       /// <summary>
+       /// CAFF file extension
+       /// </summary>
         private string[] permittedExtensions = { ".caff" };
+        /// <summary>
+        /// CAFF files signatures: \x43\x41\x46\x46
+        /// </summary>
         private static readonly Dictionary<string, List<byte[]>> _fileSignature =
                                                 new Dictionary<string, List<byte[]>>
         {
@@ -39,10 +46,15 @@ namespace Webshop.Controllers
                 }
             },
         };
-        //20MB
+        /// <summary>
+        /// Maximum upload size: 20MB
+        /// </summary>
         private static long fileSizeLimit = 20000 * 1024;
 
         private readonly ILogger<CaffFileController> _logger;
+
+        [DllImport("ciffgen.dll")]
+        public static extern void generateCiff(string caffSrc, string ciffDst);
         public CaffFileController(WebshopContext context, UserManager<SiteUser> userManager, IAuthorizationService authorizationService, ILogger<CaffFileController> logger)
         {
             _context = context;
@@ -50,11 +62,11 @@ namespace Webshop.Controllers
             _authorizationService = authorizationService;
             _logger = logger;
         }
-        
+
 
         public async Task<IActionResult> Index(string searchString)
         {
-            _logger.LogInformation("User : "+ _userManager.GetUserName(User) + "  Action: The /Index page has been accessed.");
+            _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Index page has been accessed.");
             ViewData["CurrentFilter"] = searchString;
             var caffFiles = from c in _context.CaffFiles.Include(c => c.User) select c;
 
@@ -64,7 +76,7 @@ namespace Webshop.Controllers
             }
             return View("Index", await caffFiles.AsNoTracking().ToListAsync());
         }
-
+        
         public IActionResult List()
         {
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /List page has been accessed.");
@@ -77,7 +89,11 @@ namespace Webshop.Controllers
             return View();
         }
 
-        // POST: CaffFile/Upload
+        /// <summary>
+        /// Handles the file upload functionality and save files into the database.
+        /// </summary>
+        /// <param name="caff">The model of the uploaded caff file.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CaffFileViewModel caff)
@@ -97,29 +113,29 @@ namespace Webshop.Controllers
                 {
                     return Unauthorized();
                 }
-                
+
                 if (caff.Content != null)
                 {
                     // TODO: Add the file uploader function here that returns the path of the uploaded CAFF file
-                    var verified = await VerifyAndUploadCaffFileAsync(caff.Content);
+                    var verified =await VerifyAndUploadCaffFileAsync(caff.Content);
                     var caffPath = verified[0];
+                    
                     if (caffPath == "")
                     {
                         return View("Error");
                     }
-                    // TODO: Process the CAFF file and get the result CIFF
-                    // TODO: Add the CIFF to PNG converter function here that returns the path of the generated image
-                    var imagePath = verified[1];
+                    var imagePath = verified[2];
 
                     newCaffFile.Path = caffPath;
                     newCaffFile.ImagePath = imagePath;
                     _context.CaffFiles.Add(newCaffFile);
-                   
+
                     await _context.SaveChangesAsync();
-                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: Uploaded a new CAFF. CaffPath: "+ caffPath);
+
+                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: Uploaded a new CAFF. CaffPath: " + caffPath);
                     _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: Uploaded a new CAFF. ImagePath: " + imagePath);
                 }
-                
+
                 return RedirectToAction(nameof(Index));
 
             }
@@ -128,6 +144,13 @@ namespace Webshop.Controllers
             return View(caff);
         }
 
+        /// <summary>
+        /// Check whether CAFF file meets the requirements (maximum size, signature, extension, being not null).
+        /// Use the native component(ciffgen.dll) in order to create ciff files from caff.
+        /// Use the Ciff assembly to create png file from ciff.
+        /// </summary>
+        /// <param name="formFile">Uploaded file.</param>
+        /// <returns>Return with a list that includes the path of CAFF,CIFF and PNG file.</returns>
         public async Task<List<string>> VerifyAndUploadCaffFileAsync(IFormFile formFile)
         {
             var filePaths = new List<string>();
@@ -138,7 +161,7 @@ namespace Webshop.Controllers
                 isvalid = false;
                 _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the file is empty.");
                 ViewBag.Failure = "File upload was unsuccessful due to not appropriate file extension.";
-              //  return View("Error");
+                
             }
 
             //Check Magic bytes
@@ -154,7 +177,7 @@ namespace Webshop.Controllers
                         headerBytes[i - 9] = all_headerBytes[i];
                     }
                 }
-                
+
                 if (!(signatures.Any(signature =>
                     headerBytes.Take(signature.Length + 9).SequenceEqual(signature))))
                 {
@@ -174,25 +197,28 @@ namespace Webshop.Controllers
                 {
                     var random = Path.GetRandomFileName();
                     var replaced = random.Split(".")[0] + ".caff";
-                    
-                    //filePaths[0] - CAFF PATH
-                    //filePaths[1] - PNG PATH
-                    filePaths.Add(Path.Combine("\\Uploads\\CAFF\\", replaced));
-                    var caffToCiff = "dll";
-                    var path = "path";
+                    var replaced_ciff = random.Split(".")[0] + ".ciff";
 
-                    //TODO: DYNAMIC
-                    filePaths.Add("\\images\\uploads\\"+ random.Split(".")[0] + ".png");
-                    var ciffToPng = new ciff();
-                    
-                    ciffToPng.cifftopng(Directory.GetCurrentDirectory()+"\\Uploads\\CIFF\\something.ciff",
-                                    Directory.GetCurrentDirectory() + "\\wwwroot\\images\\uploads\\" + random.Split(".")[0] + ".png");
+                    filePaths.Add(Path.Combine("\\Uploads\\CAFF\\", replaced));
+                    filePaths.Add(Path.Combine("\\Uploads\\CIFF\\", replaced_ciff));
+                    filePaths.Add("\\images\\uploads\\" + random.Split(".")[0] + ".png");
+
+
                     using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + filePaths[0]))
                     {
-                       await formFile.CopyToAsync(stream);
+                        await formFile.CopyToAsync(stream);
                     }
-                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file, "+ random.Split(".")[0] + ".caff is valid.");
-                    //return filePaths;
+
+                    generateCiff(Directory.GetCurrentDirectory()+filePaths[0], Directory.GetCurrentDirectory()+filePaths[1]);
+                   
+                  
+                    var ciffToPng = new ciff();
+
+                    ciffToPng.cifftopng(Directory.GetCurrentDirectory() + filePaths[1],
+                                    Directory.GetCurrentDirectory() + "\\wwwroot\\images\\uploads\\" + random.Split(".")[0] + ".png");
+                    
+                    _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file, " + random.Split(".")[0] + ".caff is valid.");
+                   
                 }
             }
             else
@@ -238,7 +264,7 @@ namespace Webshop.Controllers
             var originalCaffFile = GetCaffFile(editedCaffFile.Id);
             if (ModelState.IsValid)
             {
-                
+
                 if (originalCaffFile == null)
                 {
                     return NotFound();
@@ -252,14 +278,18 @@ namespace Webshop.Controllers
 
                 originalCaffFile.Comment = editedCaffFile.Comment;
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file "+ originalCaffFile.Path+ " has been modified successfully.");
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + originalCaffFile.Path + " has been modified successfully.");
                 return RedirectToAction("Index");
             }
-           // var originalCaffFile = GetCaffFile(editedCaffFile.Id);
+            // var originalCaffFile = GetCaffFile(editedCaffFile.Id);
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + originalCaffFile.Path + " hasn't been modified successfully.");
             return View(editedCaffFile);
         }
-
+        /// <summary>
+        /// Confirmation of deleting the previously chosen file.
+        /// </summary>
+        /// <param name="id">The ID of the chosen file.</param>
+        /// <returns></returns>
         public IActionResult Delete(int? id)
         {
 
@@ -273,11 +303,11 @@ namespace Webshop.Controllers
             {
                 return NotFound();
             }
-            
+
             var isAuthorized = _authorizationService.AuthorizeAsync(User, caffToDelete, CaffFileOperations.Delete);
             if (!isAuthorized.Result.Succeeded)
             {
-                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Delete page hasn't been accessed. File: "+caffToDelete.Path);
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Delete page hasn't been accessed. File: " + caffToDelete.Path);
 
                 return Unauthorized();
             }
@@ -289,7 +319,12 @@ namespace Webshop.Controllers
             return View(caffToDelete);
         }
 
-        // POST: CaffFile/Delete/5
+        /// <summary>
+        /// Delete the file from database.
+        /// Delete CAFF,CIFF and PNG from physical storage.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -303,30 +338,44 @@ namespace Webshop.Controllers
             var isAuthorized = _authorizationService.AuthorizeAsync(User, originalCaffFile, CaffFileOperations.Delete);
             if (!isAuthorized.Result.Succeeded)
             {
-                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The user tried to access to the delete page of " + originalCaffFile.Path + "but has no right to do so. " );
+                _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The user tried to access to the delete page of " + originalCaffFile.Path + "but has no right to do so. ");
 
                 return Unauthorized();
 
             }
             var paths = new List<string>();
-            
-            //Delete file physically
+
             paths.Add(originalCaffFile.ImagePath);
             paths.Add(originalCaffFile.Path);
-            paths.Add(originalCaffFile.Path.Replace("CAFF", "CIFF"));
-            System.IO.File.Delete(Directory.GetCurrentDirectory()+ "\\wwwroot" + paths[0]);
-            System.IO.File.Delete(Directory.GetCurrentDirectory() + paths[1]);
-            System.IO.File.Delete(Directory.GetCurrentDirectory() + paths[2]);
-
+            var s = originalCaffFile.Path.Replace("CAFF", "CIFF");
+            paths.Add(originalCaffFile.Path.Replace("CAFF", "CIFF").Replace("caff","ciff"));
+            if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot" + paths[0]))
+            {
+                System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\wwwroot" + paths[0]);
+            }
+            if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot" + paths[1]))
+            {
+                System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\wwwroot" + paths[1]);
+            }
+            if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot" + paths[2]))
+            {
+                System.IO.File.Delete(Directory.GetCurrentDirectory() + "\\wwwroot" + paths[2]);
+            }
+           
+           
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + originalCaffFile.Path + " has been deleted successfully.");
 
 
             _context.CaffFiles.Remove(originalCaffFile);
             await _context.SaveChangesAsync();
-            // TODO: Delete CAFF and PNG files as well
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Get the CaffFile object with the given ID.
+        /// </summary>
+        /// <param name="caffId">The ID of the CaffFile.</param>
+        /// <returns>Return with the CaffFile object.</returns>
         public CaffFile GetCaffFile(int? caffId)
         {
             if (caffId == null)
@@ -336,15 +385,19 @@ namespace Webshop.Controllers
                 .FirstOrDefault(Caff => Caff.Id == caffId);
         }
 
-        // TODO: Download CAFF file
+        /// <summary>
+        /// Download the CAFF with the given ID.
+        /// </summary>
+        /// <param name="id">The ID of the CAFF file that is about to be downloaded.</param>
+        /// <returns>Return with the chosen CAFF file</returns>
         public async Task<IActionResult> Download(int? id)
         {
             if (id == null)
                 return View("Error");
 
-           
-            var path =  Directory.GetCurrentDirectory() + GetCaffFile(id).Path;
-            
+
+            var path = Directory.GetCurrentDirectory() + GetCaffFile(id).Path;
+
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
             {
@@ -353,7 +406,7 @@ namespace Webshop.Controllers
             memory.Position = 0;
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The file " + path + " has been downloaded successfully.");
 
-            return File(memory,GetContentType(path), Path.GetFileName(path));
+            return File(memory, GetContentType(path), Path.GetFileName(path));
         }
 
         private string GetContentType(string path)

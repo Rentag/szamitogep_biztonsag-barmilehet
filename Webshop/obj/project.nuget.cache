@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ETD5O61NFEz97QrSCpOzocSE+ZKn2l7mLeYew8bOKqKuY0sE54Jn/YKl+1XmcWsz5bxy//PkGPkion7FwiIbNw==",
+  "dgSpecHash": "xoKuAf0EeH+GcK5ApDZpWmVd3CKnAPGE2uvpBVlxQYZDx903Z/UTc2TXnJojs6cgxMpUyBFQI6gSZp7TNyZqqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\akos\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj",
+  "projectFilePath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\new\\szamitogep_biztonsag-barmilehet-akos\\Webshop\\Webshop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\playm\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\playm\\.nuget\\packages\\microsoft.aspnetcore\\2.1.7\\microsoft.aspnetcore.2.1.7.nupkg.sha512",
