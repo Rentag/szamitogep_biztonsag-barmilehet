@@ -168,12 +168,12 @@ using Webshop.Models;
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n    <div align=\"center\">\r\n        ");
             EndContext();
             BeginContext(944, 237, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b8147d651df549e0b0333ef7d2a75ba8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01d3f0bb077d4b2994e281e1fbe0227f", async() => {
                 BeginContext(971, 14, true);
                 WriteLiteral("\r\n            ");
                 EndContext();
                 BeginContext(985, 36, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4fd12b7d56474044b20c26cd239107c6", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "5a0c7dcd448c4f5f9fd60b924a5df649", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -198,7 +198,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n            ");
                 EndContext();
                 BeginContext(1035, 38, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c351f4a0eff34e5194a0c27d65bf75af", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4da040464cd4ba381482c92261b53a2", async() => {
                     BeginContext(1057, 12, true);
                     WriteLiteral("Back to List");
                     EndContext();
