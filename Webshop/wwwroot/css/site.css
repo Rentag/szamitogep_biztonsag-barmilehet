@@ -5,6 +5,18 @@ body {
     padding-bottom: 20px;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    padding: 10px 30px;
+}
+
+h4{
+    margin: 24px 0px 24px 0px;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -21,6 +33,17 @@ body {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
+}
+
+/* Makes the button in line with the search bar */
+.btn-default {
+    padding: 3px 12px;
+    margin: 0px 0px 3px 0px;
+}
+
+.btn-primary {
+    padding: 3px 12px;
+    margin: 0px 0px 3px 0px;
 }
 
 /* QR code generator */
