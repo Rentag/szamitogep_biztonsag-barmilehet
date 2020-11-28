@@ -28,6 +28,7 @@
                 </button>
                 <a asp-controller="CaffFile" asp-action="Index" class="navbar-brand">Webshop</a>
             </div>
+            @if (User.Identity.IsAuthenticated) { 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="CaffFile" asp-action="Create" >Upload</a></li>
@@ -35,6 +36,7 @@
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
+            }
         </div>
     </nav>
 
