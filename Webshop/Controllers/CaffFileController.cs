@@ -126,12 +126,13 @@ namespace Webshop.Controllers
                 {
                     // TODO: Add the file uploader function here that returns the path of the uploaded CAFF file
                     var verified =await VerifyAndUploadCaffFileAsync(caff.Content);
-                    var caffPath = verified[0];
+                   
                     
-                    if (caffPath == "")
+                    if (verified == null)
                     {
                         return View("Error");
                     }
+                    var caffPath = verified[0];
                     var imagePath = verified[2];
 
                     newCaffFile.Path = caffPath;
@@ -169,7 +170,7 @@ namespace Webshop.Controllers
                 isvalid = false;
                 _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the file is empty.");
                 ViewBag.Failure = "File upload was unsuccessful due to not appropriate file extension.";
-                
+                return null;
             }
 
             //Check Magic bytes
@@ -193,7 +194,7 @@ namespace Webshop.Controllers
                     _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the signature is incorrect.");
 
                     ViewBag.Failure = "File upload was unsuccessful due to not appropriate magic numbers.";
-                    //return View("Error");
+                    return null;
                 }
             }
             //Check if not null and length is maximumom of x bytes.
@@ -234,7 +235,7 @@ namespace Webshop.Controllers
                 _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The uploaded file .caff is not valid because the file size is incorrect.");
 
                 ViewBag.Failure = "File upload was unsuccessful due to not appropriate file size.";
-                //return View("Error");
+                return null;
             }
             return filePaths;
         }

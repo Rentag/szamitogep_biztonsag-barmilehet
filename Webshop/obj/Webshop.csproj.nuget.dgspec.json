@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\new\\szamitogep_biztonsag-barmilehet-akos\\Webshop\\Webshop.csproj": {}
+    "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\joooooo\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\new\\szamitogep_biztonsag-barmilehet-akos\\Webshop\\Webshop.csproj": {
+    "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\joooooo\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\new\\szamitogep_biztonsag-barmilehet-akos\\Webshop\\Webshop.csproj",
+        "projectUniqueName": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\joooooo\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj",
         "projectName": "Webshop",
-        "projectPath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\new\\szamitogep_biztonsag-barmilehet-akos\\Webshop\\Webshop.csproj",
+        "projectPath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\joooooo\\szamitogep_biztonsag-barmilehet\\Webshop\\Webshop.csproj",
         "packagesPath": "C:\\Users\\playm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\new\\szamitogep_biztonsag-barmilehet-akos\\Webshop\\obj\\",
+        "outputPath": "C:\\Users\\playm\\Desktop\\MSc\\szamitogep_biztonsag\\joooooo\\szamitogep_biztonsag-barmilehet\\Webshop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\playm\\AppData\\Roaming\\NuGet\\NuGet.Config",
