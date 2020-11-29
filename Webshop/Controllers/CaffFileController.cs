@@ -63,7 +63,11 @@ namespace Webshop.Controllers
             _logger = logger;
         }
 
-
+        /// <summary>
+        /// Shows all of the uploaded files, optionally filtered by creator
+        /// </summary>
+        /// <param name="searchString">name of the file's creator</param>
+        /// <returns>A view with the filtered files</returns>
         public async Task<IActionResult> Index(string searchString)
         {
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Index page has been accessed.");
@@ -77,6 +81,10 @@ namespace Webshop.Controllers
             return View("Index", await caffFiles.AsNoTracking().ToListAsync());
         }
         
+        /// <summary>
+        /// Collects the uploaded files for the logged in user
+        /// </summary>
+        /// <returns>A view with the uploaded files</returns>
         public IActionResult List()
         {
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /List page has been accessed.");
@@ -231,6 +239,11 @@ namespace Webshop.Controllers
             return filePaths;
         }
 
+        /// <summary>
+        /// Prepares the chosen caff file for editing
+        /// </summary>
+        /// <param name="id">The ID of the chonsen file</param>
+        /// <returns></returns>
         public IActionResult Edit(int? id)
         {
             _logger.LogInformation("User : " + _userManager.GetUserName(User) + "  Action: The /Edit page has been accessed.");

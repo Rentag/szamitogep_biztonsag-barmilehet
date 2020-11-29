@@ -35,6 +35,12 @@ namespace Webshop.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Registers the new user
+        /// </summary>
+        /// <param name="user">UserViewModel with the user's login data</param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken()]
@@ -88,6 +94,12 @@ namespace Webshop.Controllers
             return View();
         }
 
+        /// <summary>
+        /// User login
+        /// </summary>
+        /// <param name="user">LoginViewModel with the user's login credentials</param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -124,6 +136,10 @@ namespace Webshop.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// User logout
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
             _logger.LogInformation("The user: " + _userManager.GetUserName(User) + " has been logged out.");

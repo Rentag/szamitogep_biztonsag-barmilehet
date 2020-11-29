@@ -54,25 +54,6 @@ namespace Webshop.Data
 
                 }
             }
-
-            /*
-            // Look for any students.
-            if (context.Cities.Any())
-            {
-                return;   // DB has been seeded
-            }
-
-            var cities = new City[]
-                        {
-                new City {Name = "Budapest"},
-                new City {Name = "Győr"},
-                        };
-
-            foreach (City c in cities)
-            {
-                context.Cities.Add(c);
-            }
-            */
             context.SaveChanges();
         }
     }
